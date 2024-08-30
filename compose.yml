@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  db:
+    build:
+        context: .
+    container_name: swim_mysql
+    platform: linux/x86_64
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: verysecret
+        MYSQL_DATABASE: swim_db
+        MYSQL_USER: myuser
+        MYSQL_PASSWORD: secret
+    ports:
+        - "3307:3306"
+    volumes:
+      - ./sql-data:/var/lib/mysql
