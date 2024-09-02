@@ -1,4 +1,4 @@
-package com.example.swimServer.domain.model.user;
+package com.example.swimServer.domain.model.entity.swimmer.user;
 
 import jakarta.persistence.*;
 

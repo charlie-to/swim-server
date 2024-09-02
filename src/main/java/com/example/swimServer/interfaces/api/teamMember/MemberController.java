@@ -1,6 +1,6 @@
 package com.example.swimServer.interfaces.api.teamMember;
 
-import com.example.swimServer.domain.model.swimmer.Swimmer;
+import com.example.swimServer.domain.model.entity.swimmer.Swimmer;
 import com.example.swimServer.interfaces.dto.SwimmerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
