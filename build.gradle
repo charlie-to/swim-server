@@ -28,6 +28,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testImplementation 'org.testcontainers:mariadb'
 	testImplementation 'org.testcontainers:junit-jupiter'
 	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0"
 }
@@ -35,4 +36,20 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 	jvmArgs("-XX:+EnableDynamicAgentLoading")
+}
+
+tasks.create("smallTest", Test) {
+	useJUnitPlatform({
+		includeTags 'small'
+	})
+	jvmArgs("-XX:+EnableDynamicAgentLoading")
+	mustRunAfter check
+}
+
+tasks.create("mediumTest", Test) {
+	useJUnitPlatform({
+		includeTags 'medium'
+	})
+	jvmArgs("-XX:+EnableDynamicAgentLoading")
+	mustRunAfter check
 }
