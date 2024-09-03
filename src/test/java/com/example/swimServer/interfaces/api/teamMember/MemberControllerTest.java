@@ -1,5 +1,6 @@
 package com.example.swimServer.interfaces.api.teamMember;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,6 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MemberControllerTest {
 
     @Test
+    @Tag("medium")
     void CanAddTeamMember(@Autowired MockMvc mvc) throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/member/swimmer/add")
             .contentType("application/json")
@@ -24,6 +26,7 @@ public class MemberControllerTest {
     }
 
     @Test
+    @Tag("medium")
     void CanGetAllTeamMembers(@Autowired MockMvc mvc) throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/member/swimmer/all"))
             .andExpect(status().isOk());

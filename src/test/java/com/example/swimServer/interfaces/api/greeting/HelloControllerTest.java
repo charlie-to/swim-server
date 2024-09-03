@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class HelloControllerTest {
 
     @Test
-    @Tag("integration")
+    @Tag("medium")
     public void CanGetHelloWorldMessage(@Autowired MockMvc mvc) throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/hello"))
             .andExpect(status().isOk())
