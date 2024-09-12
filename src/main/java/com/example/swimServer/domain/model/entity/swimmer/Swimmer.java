@@ -1,47 +1,38 @@
 package com.example.swimServer.domain.model.entity.swimmer;
 
+import com.example.swimServer.domain.model.entity.record.RaceRecord;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "swimmer")
 public class Swimmer  {
+    @Getter
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
+    @Getter
+    @Setter
     private  String familyName;
+    @Getter
+    @Setter
     private  String givenName;
 
+    @Getter
+    @Setter
     private Integer age;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
-    }
-
-    public String getFamilyName() {
-        return familyName;
-    }
-
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
-    }
-
-    public String getGivenName() {
-        return givenName;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
+    @OneToMany(mappedBy = "swimmer")
+    private List<RaceRecord> raceRecords = new ArrayList<>();
 
     public String toJson() {
         return "{\"id\":" + id + ",\"familyName\":\"" + familyName + "\",\"givenName\":\"" + givenName + "\",\"age\":" + age + "}";

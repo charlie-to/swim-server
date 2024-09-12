@@ -1,11 +1,17 @@
 package com.example.swimServer.domain.model.valueObject.raceType;
 
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 @Embeddable
+@Builder
 public class RaceType implements java.io.Serializable {
-    private final Integer distance_m;
-    private final SwimStyle swimStyle;
+    protected  Integer distance_m;
+    protected  SwimStyle swimStyle;
+
+    public RaceType() {
+    }
 
     public RaceType(Integer distance_m, SwimStyle swimStyle) {
         // 25m - 1500m　の範囲で、25m,50m,100m,200m,400m,800m,1500mのみ

@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 services:
   db:
     build:
@@ -15,3 +15,17 @@ services:
         - "3307:3306"
     volumes:
       - ./sql-data:/var/lib/mysql
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.4
+    container_name: swim_keycloak
+    restart: on-failure
+    command: start-dev --import-realm
+    environment:
+      TZ: Asia/Tokyo
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - 8081:8080
+    volumes:
+        - ./keycloak-data:/opt/jboss/keycloak/standalone/data

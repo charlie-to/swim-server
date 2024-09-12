@@ -1,13 +1,20 @@
 spring.application.name=swimServer
-springdoc.swagger-ui.path=/docs.html
+server.port=8080
 
 # hibanate
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDBDialect
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
 # mariadb
 spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 spring.datasource.url=jdbc:mariadb://localhost:3307/swim_db?serverTimezone=JST&serverRsaPublicKeyFile=./public_key.pem
 spring.datasource.username=myuser
 spring.datasource.password=secret
-spring.jpa.hibernate.ddl-auto=update
+spring.jpa.hibernate.ddl-auto=create
 spring.jpa.show-sql=true
+
+# security
+spring.security.user.name=user
+spring.security.user.password=password
+
+spring.security.oauth2.authorizationserver.client.oidc-client.
+

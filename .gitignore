@@ -138,3 +138,6 @@ sql-data/
 
 # pem files
 *.pem
+
+application*.yml
+.idea/

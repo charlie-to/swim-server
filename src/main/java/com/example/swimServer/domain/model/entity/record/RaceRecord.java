@@ -1,43 +1,37 @@
 package com.example.swimServer.domain.model.entity.record;
 
+import com.example.swimServer.domain.model.entity.swimmer.Swimmer;
 import com.example.swimServer.domain.model.valueObject.raceType.RaceType;
-import com.example.swimServer.domain.model.valueObject.raceType.SwimStyle;
-import com.example.swimServer.interfaces.dto.RecordDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Embeddable
 @Table(name = "race")
+@Builder
 public class RaceRecord implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    private Long swimmerId;
-
+    @Getter
     @Embedded
     private RaceType raceType;
 
+    @Getter
     private float time_s;
 
-    public RaceRecord(){}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Swimmer swimmer;
 
-    public RaceRecord(RecordDto recordDto){
-        this.swimmerId = recordDto.swimmerId;
-        this.raceType = new RaceType(recordDto.distance, SwimStyle.valueOf(recordDto.swimStyle.toUpperCase()));
-        this.time_s = recordDto.time_s;
-    }
-
-    public Long getSwimmerId() {
-        return swimmerId;
-    }
-
-    public RaceType getRaceType() {
-        return raceType;
-    }
-
-    public float getTime_s() {
-        return time_s;
+    public String toString(){
+        return "SwimmerId: " + swimmer.getId() + ", SwimStyle: " + raceType.getSwimStyle() + ", Distance: " + raceType.getDistance() + ", Time: " + time_s;
     }
 }

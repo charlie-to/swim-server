@@ -21,7 +21,7 @@ public class MemberController {
             return "{\"message\":\"Hello, World!\"}";
         }
 
-        @PostMapping(path = "/swimmer/add", consumes = "application/json", produces = "application/json")
+        @PostMapping(path = "/swimmer", consumes = "application/json", produces = "application/json")
         public @ResponseBody String addNewSwimmer(@RequestBody SwimmerDto swimmer) {
             Swimmer newSwimmer = new Swimmer();
             newSwimmer.setFamilyName(swimmer.familyName);
