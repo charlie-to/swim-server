@@ -1,6 +1,6 @@
 package com.example.swimServer.interfaces.api.teamMember;
 
-import com.example.swimServer.domain.model.entity.swimmer.Swimmer;
+import com.example.swimServer.domain.model.entity.swimmer.SwimmerHistory;
 import com.example.swimServer.interfaces.dto.SwimmerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +23,7 @@ public class MemberController {
 
         @PostMapping(path = "/swimmer", consumes = "application/json", produces = "application/json")
         public @ResponseBody String addNewSwimmer(@RequestBody SwimmerDto swimmer) {
-            Swimmer newSwimmer = new Swimmer();
+            SwimmerHistory newSwimmer = new SwimmerHistory();
             newSwimmer.setFamilyName(swimmer.familyName);
             newSwimmer.setGivenName(swimmer.givenName);
             newSwimmer.setAge(swimmer.age);
@@ -34,9 +34,9 @@ public class MemberController {
         @GetMapping(path = "/swimmer/all", produces = "application/json")
         public @ResponseBody String getAllSwimmers()
         {
-            List<Swimmer> swimmers = (List<Swimmer>) swimmerRepository.findAll();
+            List<SwimmerHistory> swimmers = (List<SwimmerHistory>) swimmerRepository.findAll();
             StringBuilder result = new StringBuilder("{[");
-            for (Swimmer swimmer : swimmers) {
+            for (SwimmerHistory swimmer : swimmers) {
                result.append(swimmer.toJson()).append(",");
             }
             result.append("]}");

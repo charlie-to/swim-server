@@ -1,6 +1,6 @@
 package com.example.swimServer.domain.model.entity.record;
 
-import com.example.swimServer.domain.model.entity.swimmer.Swimmer;
+import com.example.swimServer.domain.model.entity.swimmer.SwimmerHistory;
 import com.example.swimServer.domain.model.valueObject.raceType.RaceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -29,7 +29,7 @@ public class RaceRecord implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
-    private Swimmer swimmer;
+    private SwimmerHistory swimmer;
 
     public String toString(){
         return "SwimmerId: " + swimmer.getId() + ", SwimStyle: " + raceType.getSwimStyle() + ", Distance: " + raceType.getDistance() + ", Time: " + time_s;

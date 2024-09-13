@@ -1,7 +1,7 @@
 package com.example.swimServer.domain.service;
 
 import com.example.swimServer.domain.model.entity.record.RaceRecord;
-import com.example.swimServer.domain.model.entity.swimmer.Swimmer;
+import com.example.swimServer.domain.model.entity.swimmer.SwimmerHistory;
 import com.example.swimServer.domain.model.valueObject.raceType.RaceType;
 import com.example.swimServer.domain.model.valueObject.raceType.SwimStyle;
 import com.example.swimServer.infrastructure.persistance.maria.raceRecord.RaceRecordRepository;
@@ -23,7 +23,7 @@ public class RaceRecordService {
     private SwimmerRepository swimmerRepository;
 
     public void addRecord(RecordDto recordDto){
-        Swimmer swimmer = swimmerRepository.findById(recordDto.swimmerId).orElse(null);
+        SwimmerHistory swimmer = swimmerRepository.findById(recordDto.swimmerId).orElse(null);
         if(swimmer == null){
             throw new IllegalArgumentException("Swimmer not found");
         }

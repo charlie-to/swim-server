@@ -1,6 +1,6 @@
 package com.example.swimServer.domain.service;
 
-import com.example.swimServer.domain.model.entity.swimmer.Swimmer;
+import com.example.swimServer.domain.model.entity.swimmer.SwimmerHistory;
 import com.example.swimServer.infrastructure.persistance.maria.swimmer.SwimmerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +12,15 @@ public class SwimmerService {
    @Autowired
     private SwimmerRepository swimmerRepository;
 
-    public void addSwimmer(Swimmer swimmer){
+    public void addSwimmer(SwimmerHistory swimmer){
         swimmerRepository.save(swimmer);
     }
 
-    public Swimmer getSwimmer(Long id){
+    public SwimmerHistory getSwimmer(Long id){
         return swimmerRepository.findById(id).orElse(null);
     }
 
-    public Iterable<Swimmer> getAllSwimmers(){
+    public Iterable<SwimmerHistory> getAllSwimmers(){
         return swimmerRepository.findAll();
     }
 
@@ -28,7 +28,7 @@ public class SwimmerService {
         swimmerRepository.deleteById(id);
     }
 
-    public void updateSwimmer(Swimmer swimmer){
+    public void updateSwimmer(SwimmerHistory swimmer){
         swimmerRepository.save(swimmer);
     }
 }

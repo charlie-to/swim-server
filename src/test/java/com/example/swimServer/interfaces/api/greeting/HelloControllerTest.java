@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.authentication.AuthenticationManagerResolver;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,6 +25,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Testcontainers
 public class HelloControllerTest {
 
+    @MockBean
+    private AuthenticationManagerResolver<?> authenticationManagerResolver;
+
     @Container
     private static final MariaDBContainer<?> mariaDBContainer = new MariaDBContainer<>("mariadb:latest");
 
@@ -38,7 +43,6 @@ public class HelloControllerTest {
     }
 
     @Test
-    @Tag("medium")
     public void CanGetHelloWorldMessage(@Autowired MockMvc mvc) throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/hello"))
             .andExpect(status().isOk())

@@ -1,8 +1,12 @@
 package com.example.swimServer.infrastructure.persistance.maria.raceRecord;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -12,8 +16,9 @@ import org.testcontainers.containers.MariaDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@SpringBootTest
 @Testcontainers
+@DataJpaTest(excludeAutoConfiguration = AutoConfigureTestDatabase.class)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class RaceRecordRepositoryTest {
 
     @Container
@@ -30,7 +35,7 @@ public class RaceRecordRepositoryTest {
     private RaceRecordRepository raceRecordRepository;
 
     @Test
-    @Tag("medium")
+    @Tag("large")
     void CanGetRecord() throws Exception {
         var records =  raceRecordRepository.findAll();
         System.out.println("Records:");

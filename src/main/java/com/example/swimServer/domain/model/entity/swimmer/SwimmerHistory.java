@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "swimmer")
-public class Swimmer  {
+public class SwimmerHistory {
     @Getter
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

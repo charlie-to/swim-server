@@ -1,7 +1,7 @@
 package com.example.swimServer.application;
 
 import com.example.swimServer.domain.model.entity.record.RaceRecord;
-import com.example.swimServer.domain.model.entity.swimmer.Swimmer;
+import com.example.swimServer.domain.model.entity.swimmer.SwimmerHistory;
 import com.example.swimServer.domain.service.RaceRecordService;
 import com.example.swimServer.infrastructure.persistance.maria.raceRecord.RaceRecordRepository;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ public class RaceRecordServiceTests {
         // given
         RaceRecord raceRecord = new RaceRecord();
         raceRecord.setId(1L);
-        raceRecord.setSwimmer(new Swimmer());
+        raceRecord.setSwimmer(new SwimmerHistory());
         given(raceRecordRepository.findById(1L)).willReturn(Optional.of(raceRecord));
 
         // when
