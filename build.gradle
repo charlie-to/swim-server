@@ -3,6 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '3.3.2'
 	id 'io.spring.dependency-management' version '1.1.6'
 	id "org.springdoc.openapi-gradle-plugin" version "1.8.0"
+	id "org.flywaydb.flyway" version "10.18.0"
 }
 
 group = 'com.example'
@@ -42,6 +43,7 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-oauth2-resource-server'
 	implementation group: 'com.c4-soft.springaddons', name: 'spring-addons-starter-oidc', version: '7.1.8'
 	implementation group: 'com.c4-soft.springaddons', name: 'spring-addons-starter-oidc-test', version: '7.8.10'
+	implementation 'org.htmlunit:htmlunit:4.4.0'
 }
 
 tasks.named('test') {
@@ -68,6 +70,14 @@ tasks.create("mediumTest", Test) {
 tasks.create("largeTest", Test) {
 	useJUnitPlatform({
 		includeTags 'large'
+	})
+	jvmArgs("-XX:+EnableDynamicAgentLoading")
+	mustRunAfter check
+}
+
+tasks.create("hugeTest", Test) {
+	useJUnitPlatform({
+		includeTags 'huge'
 	})
 	jvmArgs("-XX:+EnableDynamicAgentLoading")
 	mustRunAfter check

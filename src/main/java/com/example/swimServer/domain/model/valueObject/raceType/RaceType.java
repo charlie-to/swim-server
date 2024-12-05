@@ -3,11 +3,13 @@ package com.example.swimServer.domain.model.valueObject.raceType;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 
 @Embeddable
 @Builder
 public class RaceType implements java.io.Serializable {
     protected  Integer distance_m;
+    @Getter
     protected  SwimStyle swimStyle;
 
     public RaceType() {
@@ -26,13 +28,18 @@ public class RaceType implements java.io.Serializable {
             throw new IllegalArgumentException("Invalid distance");
         }
         // 800mはフリースタイルとフリーリレーのみ
-        if ((distance_m == 800 && swimStyle != SwimStyle.FREESTYLE) || (distance_m == 800 && swimStyle != SwimStyle.FREESTYLE_RELAY)) {
-            throw new IllegalArgumentException("Invalid distance");
+        if(distance_m == 800){
+            switch (swimStyle) {
+                case FREESTYLE -> {}
+                case FREESTYLE_RELAY -> {}
+                default -> throw new IllegalArgumentException("Invalid distance");
+            }
         }
         // 400mはフリースタイル、個人メドレー、リレー種目のみ
-        if ((distance_m == 400 && swimStyle != SwimStyle.FREESTYLE) || (distance_m == 400 && swimStyle != SwimStyle.MEDLEY) || (distance_m == 400 && swimStyle != SwimStyle.FREESTYLE_RELAY) || (distance_m == 400 && swimStyle != SwimStyle.MEDLEY_RELAY)) {
+        if(distance_m == 400){
+        if ((swimStyle == SwimStyle.BACKSTROKE) || (swimStyle == SwimStyle.BREASTSTROKE) ) {
             throw new IllegalArgumentException("Invalid distance");
-        }
+        }}
         // 200mは全ての種目なのでチェック不要
         // 100mは全ての種目なのでチェック不要
         // 50mはリレー種目はない
@@ -66,7 +73,4 @@ public class RaceType implements java.io.Serializable {
         return distance_m;
     }
 
-    public SwimStyle getSwimStyle() {
-        return swimStyle;
-    }
 }
